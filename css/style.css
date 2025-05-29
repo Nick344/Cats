@@ -3,13 +3,20 @@
     padding: 0;
     font-family: sans-serif;
 }
-
+body {
+    margin: 0;
+    padding: 0;
+}
 
 .container {
-    width: 1280px;
     margin: 0 auto;
 }
 .header {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 1002;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,19 +27,38 @@
 display: flex;
 align-items: center;
 }
+.logo__img {
+    width: 50px;
+    height: 50px;
+}
 .logo-text {
     font-size: 40px;
     color: orange;
     margin-left: 5px;
 }
 
-.menuu {
+.search-menu {
+    display: flex;
+    align-items: center;
+}
+.search-box {
     display: flex;
     margin-left: 70px;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
 }
 .search-input {
+    border: none;
+    outline: none;
     width: 350px;
     height: 30px;
+    padding: 10px;
+}
+.search-button {
+    border: none;
+    outline: none;
+    padding: 6px;
 }
 
 .menu-right {
@@ -44,9 +70,12 @@ align-items: center;
 .menu {
     position: relative;
     display: inline-block;
+    margin-left: 20px;
 }
 
 .menu-button {
+    z-index: 2;
+    position: relative;
     background: orange;
     border: none;
     padding: 10px;
@@ -56,11 +85,14 @@ align-items: center;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-right: 10px;
+    margin-bottom: 0;
 }
 
 .dropdown {
+    z-index: 1;
     position: absolute;
-    top: 50px;
+    top: 100%;
     right: 0;
     background: white;
     border: 1px solid #ddd;
@@ -73,8 +105,8 @@ align-items: center;
     pointer-events: none;
 }
 
-.menu:hover .dropdown,
-.menu:focus-within .dropdown {
+.menu:hover .dropdown {
+    display: block;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -105,28 +137,72 @@ display: flex;
 }
 
 .panel {
+    position: fixed;
+    top: 102px;
+    left: 0;
     width: 250px;
-    padding-right: 20px;
+    height: calc(100vh - 102px);
+    overflow-x: auto;
     background-color: darkgrey;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    transition: width 0.3s;
+}
+@media (max-width: 800px) {
+    .panel {
+        width: 70px;
+    }
+    .content {
+        margin-left: 70px;
+    }
+    .panel-cat {
+        content: "Cat";
+        font-size: 18px;
+    }
+    .social {
+        display: none;
+    }
+}
+
+.streams {
+    flex-grow: 1;
+    overflow-y: auto;
 }
 .panel-cat {
     display: flex;
     text-align: center;
     align-items: center;
     margin-top: 20px;
+    background-color: gray;
+    border-radius: 15px;
+    padding: 5px;
 }
 .panel-text {
     margin-left: 10px;
     margin-right: 50px;
 }
+.viewers {
+    position: relative;
+    display: inline-block;
+    padding-left: 10px;
+
+}
 .panel-circle {
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    transform: translateY(-50%);
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: red;
+}
+.separate {
+    height: 1px;
+    width: 100%;
+    background-color: #ffffff;
 }
 .social {
     margin-top: 3px;
@@ -135,6 +211,7 @@ display: flex;
     width: 190px;
     font-family: monospace;
     background-color: darkgrey;
+
 }
 .social-block {
     background-color: gray;
@@ -158,20 +235,31 @@ display: flex;
     transition: transform 0.2s ease;
 }
 
-
+.content {
+    overflow-x: hidden;
+    margin-left: 250px;
+    padding-top: 102px;
+}
 .categories {
+    position: fixed;
     display: flex;
+    width: 100%;
+    background-color: white;
+    z-index: 1001;
     flex-wrap: nowrap;
     gap: 10px;
-    margin: 20px 0;
+    padding: 10px;
     align-items: flex-start;
     overflow-x: auto;
     white-space: nowrap;
-    height: 70px;
+    height: 50px;
+    box-sizing: border-box;
+
 }
 
 .category {
     display: inline-block;
+    white-space: nowrap;
     background-color: #f1f1f1;
     border-radius: 20px;
     padding: 8px 16px;
@@ -192,6 +280,7 @@ display: flex;
 }
 
 .carousel {
+    margin-top: 70px;
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
@@ -202,7 +291,7 @@ display: flex;
 
 .carousel-track {
     display: flex;
-    gap: -60px; /* отрицательный отступ для наложения */
+    gap: -60px;
 }
 
 .card {
@@ -240,6 +329,7 @@ display: flex;
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .video-card {
     margin-left: 20px;
@@ -312,4 +402,10 @@ display: flex;
 .text-info .author {
     font-size: 12px;
     color: gray;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }
